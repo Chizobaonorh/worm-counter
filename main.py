@@ -185,7 +185,7 @@ def process_worm_video(video_path: str):
     }
 
 @app.post("/api/analyze")
-async def analyze_video(video: UploadFile = File(...)):
+async def analyze_video(video: UploadFile = File(..., max_size=1024 * 1024 * 1024)):
     if not video.filename.endswith(tuple(ALLOWED_EXTENSIONS)):
         raise HTTPException(status_code=400, detail="Invalid file format")
     
